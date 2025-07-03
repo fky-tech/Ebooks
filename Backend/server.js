@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mySqlConnection from './Config/db.js';
+import router from './Routes/route.js';
 
 dotenv.config();
 
@@ -9,13 +10,15 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
-// used to parse key-value pairs
+// a middleware used to parse key-value pairs
 app.use(express.json());
 
-// used to parse url-enocoded data
+// a middleware used to parse url-enocoded data
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/api', router);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-    mySqlConnection;
+    // mySqlConnection;
 })
