@@ -19,7 +19,7 @@ export const viewBooks = async(req, res, next) => {
     try {
         const book = new Book();
         const bookRes = await book.getBooks();
-        if (!bookRes)
+        if (!bookRes || bookRes[0].length === 0)
             req.status(404).json({ success: false, message: "Books not found" });
 
         const bookData = bookRes[0][0];

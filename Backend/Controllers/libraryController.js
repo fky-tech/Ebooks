@@ -20,7 +20,7 @@ export const viewLibraries = async(req, res, next) => {
     try {
         const library = new Library();
         const libraryRes = await library.getLibraries();
-        if (!libraryRes)
+        if (!libraryRes || libraryRes[0].length === 0)
             req.status(404).json({ success: false, message: "Library not found" });
 
         const libraryData = libraryRes[0][0];
@@ -78,3 +78,19 @@ export const searchLibraryByName = async (req, res, next) => {
         res.status(500).json({ success: false, message: "Internal server error" });
     }
 }
+
+// export const addBookToLibrary = async (req, res, next) => {
+//     const { books, libraryName } = req.body;
+//     const formattedBook = JSON.stringify(books, null, 2);
+
+//     try {
+//         const library = new Library(formattedBook);
+//         const libraryRes = await library.insertBookToLibrary(libraryName);
+//         if(!libraryRes)
+//             res.status(404).json({ success: false, message: "Error in adding books to library" });
+//         res.status(200).json({ success: true, message: "Books added successfully" });
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ success: false, message: "Internal server error" });
+//     }
+// }

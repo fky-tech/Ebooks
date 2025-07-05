@@ -25,5 +25,6 @@ router.get('/getlibraries', viewLibraries);
 router.put('/updateLibrary', updateLibrary);
 router.delete('/deleteLibrary', deleteLibrary);
 router.get('/searchLibraryByName', searchLibraryByName);
+// router.put('/addBookToLibrary', addBookToLibrary);
 
 export default router;

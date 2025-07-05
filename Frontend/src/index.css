@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border p-0 m-0;
+  }
+  html, body {
+    @apply h-[100%];
+  }
+}
+
+@layer components {
+  .navItems.active {
+    display: block;
+  }
+}

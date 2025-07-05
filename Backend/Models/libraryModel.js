@@ -29,7 +29,6 @@ class Library {
                 this.#description,
                 this.#location,
                 this.#books
-                // JSON.stringify(this.#books)
             ]);
 
             if (!addSqlResult)
@@ -104,6 +103,18 @@ class Library {
             console.log(error);
         }
     }
+
+    // async insertBookToLibrary(libraryName) {
+    //     const insertSqlQuery = "Update libraries set books=? where library_name=?";
+    //     try {
+    //         const insertSqlResult = await mySqlConnection.query(insertSqlQuery, [ this.#books, libraryName]);
+    //         if(!insertSqlResult)
+    //             console.log("Result not found");
+    //         return insertSqlResult;
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 }
 
 export default Library;

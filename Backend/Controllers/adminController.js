@@ -7,7 +7,7 @@ const adminLogin = async (req, res, next) => {
     try {
         const admin = new Admin();
         const adminRes = await admin.login(userName);
-        if (!adminRes) {
+        if (!adminRes || adminRes[0].length === 0) {
             res.status(404).json({ success: false, message: "Not Found" });
         }
 

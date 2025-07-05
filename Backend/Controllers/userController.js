@@ -7,7 +7,7 @@ export const userLogin = async(req, res, next)=> {
     try {
         const user = new User();
         const userRes = await user.login(userName);
-        if (!userRes) {
+        if (!userRes || userRes[0].length === 0) {
             res.status(404).json({ success: false, message: "User not found" });
         }
 
@@ -38,6 +38,7 @@ export const registerUser = async(req, res, next) => {
 
         const user = new User(fullName, userName, email, hashedPwd);
         const registerRes = await user.register();
+        // console.log(registerRes);
         // console.log(registerRes[0][0].user_name);
         // if (registerRes[0][0].user_name)
         //     res.status(409).json({ success: false, message: "User already exists" });
