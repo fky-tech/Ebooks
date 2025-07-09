@@ -46,7 +46,7 @@ class Library {
             const getSqlData = await mySqlConnection.query(getSqlQuery);
             if (!getSqlData)
                 console.log("Result not found");
-            return getSqlData;
+            return [getSqlData];
         } catch (error) {
             console.log(error);
         }

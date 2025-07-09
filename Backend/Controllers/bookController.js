@@ -1,10 +1,10 @@
 import Book from "../Models/bookModel.js";
 
 export const addBook = async(req, res, next) => {
-    const { bookTitle, authorName, description, publisher, publishedDate, language, numOfPages, price, fileType, bookRate, file } = req.body;
+    const { bookTitle, authorName, img, description, publisher, publishedDate, language, genre, numOfPages, price, fileType, bookRate, file } = req.body;
 
     try {
-        const book = new Book(bookTitle, authorName, description, publisher, publishedDate, language, numOfPages, price, fileType, bookRate, file);
+        const book = new Book(bookTitle, authorName, img, description, publisher, publishedDate, language, genre, numOfPages, price, fileType, bookRate, file);
         const bookRes = await book.addBookToDb();
         if (!bookRes)
             res.status(404).json({ success: false, message: "Error in adding books" });
@@ -30,11 +30,26 @@ export const viewBooks = async(req, res, next) => {
     }
 }
 
+export const viewBooksByID = async (req, res, next) => {
+    const id = req.params.id;
+    try {
+        const book = new Book();
+        const bookRes = await book.getBookByID(id);
+        if (!bookRes || bookRes[0].length === 0)
+            res.status(404).json({ success: false, message: "Book not found" });
+        const bookData = bookRes[0][0];
+        res.status(200).json({ success: true, message: "Book fetched successfully", data: bookData });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+}
+
 export const updateBook = async (req, res, next) => {
-    const { bookTitle, authorName, description, publisher, publishedDate, language, numOfPages, price, fileType, bookRate, file, olderAuthorName } = req.body;
+    const { bookTitle, authorName, img, description, publisher, publishedDate, language, genre, numOfPages, price, fileType, bookRate, file, olderAuthorName } = req.body;
 
     try {
-        const book = new Book(bookTitle, authorName, description, publisher, publishedDate, language, numOfPages, price, fileType, bookRate, file);
+        const book = new Book(bookTitle, authorName, img, description, publisher, publishedDate, language, genre, numOfPages, price, fileType, bookRate, file);
         const updateRes = await book.putBook(olderAuthorName);
         if(!updateRes)
             res.status(404).json({ success: false, message: "error in updating the book" });
@@ -61,7 +76,7 @@ export const deleteBook = async (req, res, next) => {
 }
 
 export const searchBookByTitle = async (req, res, next) => {
-    const { bookTitle } = req.body;
+    const bookTitle = req.query.title;
 
     try {
         const book = new Book();

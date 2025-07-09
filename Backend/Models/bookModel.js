@@ -3,23 +3,27 @@ import mySqlConnection from "../Config/db.js";
 class Book {
     #bookTitle;
     #authorName;
+    #img
     #description;
     #publisher;
     #publishedDate;
     #language;
+    #genre;
     #numOfPages;
     #price;
     #fileType;
     #bookRate;
     #file;
 
-    constructor(bookTitle, authorName, description, publisher, publishedDate, language, numOfPages, price, fileType, bookRate, file) {
+    constructor(bookTitle, authorName, img, description, publisher, publishedDate, language, genre, numOfPages, price, fileType, bookRate, file) {
         this.#bookTitle = bookTitle;
         this.#authorName = authorName;
+        this.#img = img;
         this.#description = description;
         this.#publisher = publisher;
         this.#publishedDate = publishedDate;
         this.#language = language;
+        this.#genre = genre;
         this.#numOfPages = numOfPages;
         this.#price = price;
         this.#fileType = fileType;
@@ -28,17 +32,19 @@ class Book {
     }
 
     async addBookToDb() {
-        const addSqlQuery = `Insert into books (book_title, author_name, description, publisher, published_date, language, num_of_pages, price, file_type, book_rate, file)
-        values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        const addSqlQuery = `Insert into books (book_title, author_name, img, description, publisher, published_date, language, genre, num_of_pages, price, file_type, book_rate, file)
+        values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
         try {
             const addSqlResult = await mySqlConnection.query(addSqlQuery, [
                 this.#bookTitle,
                 this.#authorName,
+                this.#img,
                 this.#description,
                 this.#publisher,
                 this.#publishedDate,
                 this.#language,
+                this.#genre,
                 this.#numOfPages,
                 this.#price,
                 this.#fileType,
@@ -61,6 +67,19 @@ class Book {
             const getSqlData = await mySqlConnection.query(getSqlQuery);
             if (!getSqlData)
                 console.log("Result not found");
+            return [getSqlData];
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getBookByID(id) {
+        const getSqlQuery = "Select * from books where book_id=?";
+
+        try {
+            const getSqlData = await mySqlConnection.query(getSqlQuery, id);
+            if (!getSqlData)
+                console.log("Result not found");
             return getSqlData;
         } catch (error) {
             console.log(error);
@@ -69,17 +88,19 @@ class Book {
 
     async putBook(olderAuthorName) {
         // use author_id to update the book
-        const updateSqlQuery = `Update books set book_title=?, author_name=?, description=?, publisher=?, published_date=?, language=?, num_of_pages=?, 
+        const updateSqlQuery = `Update books set book_title=?, author_name=?, img=?, description=?, publisher=?, published_date=?, language=?, genre=?, num_of_pages=?, 
         price=?, file_type=?, book_rate=?, file=? where author_name=?`;
 
         try {
             const updateSqlResult = await mySqlConnection.query(updateSqlQuery, [
                 this.#bookTitle,
                 this.#authorName,
+                this.#img,
                 this.#description,
                 this.#publisher,
                 this.#publishedDate,
                 this.#language,
+                this.#genre,
                 this.#numOfPages,
                 this.#price,
                 this.#fileType,

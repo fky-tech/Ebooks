@@ -14,5 +14,12 @@
 @layer components {
   .navItems.active {
     display: block;
+    /* @apply min-h-screen */
+  }
+  .top-bar.activeTopBar {
+    @apply h-[100vh];
+  }
+  .nav-links {
+    
   }
 }

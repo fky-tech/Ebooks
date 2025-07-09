@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const TopNavbar = () => {
+const DashboardNavBar = () => {
   const toggleMenu = () => {
     const navItems = document.querySelector('.navItems');
     // toggle add if the class doesn't exists and remove if it's exists
@@ -41,9 +41,9 @@ const TopNavbar = () => {
                       <a href="">Contact</a>
                     </div>
                     <div className='flex flex-col lg:flex-row lg:space-x-12 space-y-5 lg:space-y-0 lg:mr-24'>
-                      <a href="">Login</a>
-                      <a href="">SignUp</a>
-                      <a href="">Cart</a>
+                      <a href="">cart</a>
+                      <a href="">light/dark</a>
+                      <a href="">profile pic</a>
                     </div>
                   {/* </div> */}
                 {/* </div> */}
@@ -90,4 +90,4 @@ const TopNavbar = () => {
   )
 }
 
-export default TopNavbar
+export default DashboardNavBar

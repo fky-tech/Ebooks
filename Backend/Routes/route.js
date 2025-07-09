@@ -1,5 +1,5 @@
 import adminLogin from "../Controllers/adminController.js";
-import { addBook, deleteBook, searchBookByTitle, updateBook, viewBooks } from "../Controllers/bookController.js";
+import { addBook, deleteBook, searchBookByTitle, updateBook, viewBooks, viewBooksByID } from "../Controllers/bookController.js";
 import { addLibrary, deleteLibrary, searchLibraryByName, updateLibrary, viewLibraries } from "../Controllers/libraryController.js";
 import { deleteProfile, registerUser, updateProfile, userLogin, viewProfile } from "../Controllers/userController.js";
 
@@ -16,6 +16,7 @@ router.get('/viewProfile', viewProfile);
 
 router.post('/addBook', addBook);
 router.get('/getBooks', viewBooks);
+router.get('/getBookById/:id', viewBooksByID)
 router.put('/updateBook', updateBook);
 router.delete('/deleteBook', deleteBook);
 router.get('/searchBookByTitle', searchBookByTitle);
