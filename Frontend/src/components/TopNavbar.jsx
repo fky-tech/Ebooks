@@ -35,15 +35,15 @@ const TopNavbar = () => {
                     </div> */}
                     {/* <div className='nav-links flex flex-col lg:space-x-12 lg:flex-row mt-44 lg:mt-0'> */}
                     <div className='nav-links flex flex-col lg:flex-row lg:space-x-12 space-y-5 lg:space-y-0'>
-                      <a href="">Home</a>
-                      <a href="">Books</a>
-                      <a href="">Libraries</a>
-                      <a href="">Contact</a>
+                      <a href="/">Home</a>
+                      <a href="/#books">Books</a>
+                      <a href="/#libraries">Libraries</a>
+                      <a href="#footer">Contact</a>
                     </div>
                     <div className='flex flex-col lg:flex-row lg:space-x-12 space-y-5 lg:space-y-0 lg:mr-24'>
-                      <a href="">Login</a>
-                      <a href="">SignUp</a>
-                      <a href="">Cart</a>
+                      <a href="/sign-in">Login</a>
+                      <a href="/register">SignUp</a>
+                      <a href="/sign-in">Cart</a>
                     </div>
                   {/* </div> */}
                 {/* </div> */}

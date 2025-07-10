@@ -52,6 +52,19 @@ class Library {
         }
     }
 
+    async getLibraryByID(id) {
+        const getQuery = 'Select * from libraries where library_id=?';
+
+        try {
+            const getData = await mySqlConnection.query(getQuery, id);
+            if (!getData)
+                console.log("Result not found");
+            return getData;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async putLibrary(olderLibraryName) {
         // use library_id to update the library
         const updateSqlQuery = `Update libraries set library_name=?, img=?, num_of_books=?, description=?, location=?, books=?

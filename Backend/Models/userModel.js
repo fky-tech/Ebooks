@@ -18,7 +18,7 @@ class User {
 
         try {
             const loginResult = await mySqlConnection.query(loginQuery, uName);
-            if (!loginResult) {
+            if (!loginResult || loginResult.length===0) {
                 console.log("Result not found");
             }
             return loginResult;

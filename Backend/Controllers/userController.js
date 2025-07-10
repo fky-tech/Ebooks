@@ -7,17 +7,18 @@ export const userLogin = async(req, res, next)=> {
     try {
         const user = new User();
         const userRes = await user.login(userName);
-        if (!userRes || userRes[0].length === 0) {
-            res.status(404).json({ success: false, message: "User not found" });
-        }
 
+        // console.log(userRes[0].length);
+        if (!userRes || userRes[0].length === 0) {
+            return res.status(401).json({ success: false, message: "User not found" });
+        }
+        
         const userPassword = userRes[0][0].password;
-        console.log(userPassword);
         
         try {
             const isMatch = await bcrypt.compare(password, userPassword);
             if(!isMatch)
-                res.status(401).json({ success: false, message: "Incorrect Password" });
+                return res.status(401).json({ success: false, message: "Incorrect Password" });
             res.status(200).json({ success: true, message: "Login successful" });
         } catch(err) {
             console.error(err);

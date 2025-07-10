@@ -31,6 +31,23 @@ export const viewLibraries = async(req, res, next) => {
     }
 }
 
+export const viewLibraryByID = async (req, res, next) => {
+    const id = req.params.id;
+
+    try {
+        const library = new Library();
+        const libraryRes = await library.getLibraryByID(id);
+        if (!libraryRes || libraryRes[0].length === 0)
+            res.status(404).json({ success: false, message: "Library not found" });
+
+        const libraryData = libraryRes[0][0];
+        res.status(200).json({ success: true, message: "Library fetched successfully", data: libraryData });
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+}
+
 export const updateLibrary = async (req, res, next) => {
     const { libraryName, image, numOfBooks, description, location, books, olderLibraryName } = req.body;
     const formattedBook = JSON.stringify(books, null, 2);

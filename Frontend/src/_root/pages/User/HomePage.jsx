@@ -13,7 +13,7 @@ const HomePage = () => {
                 // A request to get all books from the API
                 const bookRes = await axios.get('http://localhost:5000/api/getBooks');
                 const bookData = bookRes.data.data;
-                console.log(bookData)
+                // console.log(bookData)
                 
                 // A request to get all libraries from the API
                 const libraryRes = await axios.get('http://localhost:5000/api/getlibraries');
@@ -71,7 +71,7 @@ const HomePage = () => {
         </header>
 
         {/* Categories Section */}
-        <section className="bg-slate-600 py-16 px-8">
+        <section id="books" className="bg-slate-600 py-20 px-8">
             <div className="max-w-6xl mx-auto space-y-12">
                 <h2 className="text-3xl font-bold text-center mb-6">Categories</h2>
 
@@ -109,20 +109,20 @@ const HomePage = () => {
         </section>
 
 
-        <section className="bg-slate-600 py-16 px-8">
+        <section id="libraries" className="bg-slate-600 py-20 px-8">
             <div className="max-w-6xl mx-auto space-y-12">
                 <h2 className="text-3xl font-bold text-center mb-6">Libraries</h2>
 
                 <div className="w-full bg-slate-800 p-6 rounded-lg shadow">
-                    <h3 className="text-xl font-semibold mb-6">Fiction</h3>
-
                     <div className="flex overflow-x-auto gap-12">
                         {libraries.map((library, index) => (
-                            <div key={index} className="min-w-[180px] bg-gray-50 p-4 rounded-lg shadow flex-shrink-0">
+                            <Link to={`/library/${library.library_id}`}
+                            key={index}
+                            className="min-w-[180px] bg-gray-50 p-4 rounded-lg shadow flex-shrink-0">
                                 <img src={library.img} alt={library.library_name}
                                 className="w-full h-32 object-cover rounded mb-2 hover:scale-110 transition-transform"/>
                                 <h1 className="text-sm font-semibold text-gray-800">{library.library_name}</h1>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

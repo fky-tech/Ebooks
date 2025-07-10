@@ -14,7 +14,7 @@ const PagesLayout = () => {
       <div className=''>
         <Outlet />
       </div>
-      <div>
+      <div id='footer'>
         <Footer/>
       </div>
     </div>
